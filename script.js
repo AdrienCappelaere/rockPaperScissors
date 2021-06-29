@@ -7,6 +7,10 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+function capitalizeFirst(string) {
+    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
 function computerPlay() {
     let computerNumber = getRandomInt(3);
     let computerChoice = "";
@@ -23,9 +27,20 @@ function computerPlay() {
 
 function playerSelection() {
     let playerChoice = prompt("What do you want to play ? Choose between Rock, Paper and Scissors.");
+    playerChoice = capitalizeFirst(playerChoice);
     console.log(playerChoice);
-    console.log(playerChoice.toUpperCase());
+}
+
+function playRound(computerChoice, playerChoice) {
+    if (computerChoice === playerChoice) {
+        console.log("It's a tie !");
+    } else if (computerChoice == "Rock" && playerChoice == "Scissors" || computerChoice == "Scissors" && playerChoice == "Paper" || computerChoice == "Paper" && playerChoice == "Rock") {
+        console.log("The computer wins this round !");
+    } else {
+        console.log("You win this round !");
+    }
 }
 
 computerPlay();
-playerSelection();  
+playerSelection();
+playRound();
