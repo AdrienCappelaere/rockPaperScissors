@@ -34,7 +34,10 @@ function playerSelection() {
 function playRound(computerChoice, playerChoice) {
     if (computerChoice === playerChoice) {
         console.log("It's a tie !");
-    } else if (computerChoice == "Rock" && playerChoice == "Scissors" || computerChoice == "Scissors" && playerChoice == "Paper" || computerChoice == "Paper" && playerChoice == "Rock") {
+    } else if (
+        (computerChoice == "Rock" && playerChoice == "Scissors") || 
+        (computerChoice == "Scissors" && playerChoice == "Paper") || 
+        (computerChoice == "Paper" && playerChoice == "Rock")) {
         console.log("The computer wins this round !");
     } else {
         console.log("You win this round !");
