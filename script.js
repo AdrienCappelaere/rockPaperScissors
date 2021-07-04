@@ -1,16 +1,10 @@
-/*
-
-
-*/
+let possibleChoices = ["Rock", "Paper", "Scissors"];
 let computerChoice = "";
 let playerChoice = "";
+let computerScore = 0
+let playerScore = 0
 
-computerPlay(computerChoice);
-playerSelection(playerChoice);
-
-console.log("Computer choice: " + computerChoice + " and Player choice: " + playerChoice);
-
-playRound(computerChoice, playerChoice);
+playMatch();
 
 // Function to define a random int in a given range
 function getRandomInt(max) {
@@ -24,36 +18,46 @@ function capitalizeFirst(string) {
 
 function computerPlay() {
     let computerNumber = getRandomInt(3);
-    if (computerNumber === 0) {
-        computerChoice = "Rock";
-    } else if (computerNumber === 1) {
-        computerChoice = "Paper";
-    } else {
-        computerChoice = "Scissors";
-    }
-    console.log("Computer choice: " + computerChoice);
+    computerChoice = possibleChoices[computerNumber];
     return computerChoice;
 }
 
 function playerSelection() {
-    playerChoice = prompt("What do you want to play ? Choose between Rock, Paper and Scissors.");
-    playerChoice = capitalizeFirst(playerChoice);
-    console.log("Player choice: " + playerChoice);
-    return playerChoice;
+    playerChoice = "";
+    while (possibleChoices.includes(playerChoice) === false) {
+        playerChoice = prompt("What do you want to play ? Choose between Rock, Paper and Scissors.");
+        playerChoice = capitalizeFirst(playerChoice);
+        if (possibleChoices.includes(playerChoice) === false) {
+            console.log("Sorry, you must choose between 'Rock', 'Paper' and 'Scissors.");
+        }
+    }
 }
 
 function playRound(computerChoice, playerChoice) {
-    console.log("Player choice: " + playerChoice);
-    console.log("Computer choice: " + computerChoice);
+    console.log("Computer choice: " + computerChoice + " and Player choice: " + playerChoice);
     if (computerChoice === playerChoice) {
         console.log("It's a tie !");
     } else if (
         (computerChoice === "Rock" && playerChoice === "Scissors") || 
         (computerChoice === "Scissors" && playerChoice === "Paper") || 
         (computerChoice === "Paper" && playerChoice === "Rock")) {
-        console.log("The computer wins this round !");
+        computerScore++;
+        console.log("The computer wins this round ! Score: " + computerScore);
     } else {
-        console.log("You win this round !");
+        playerScore++;
+        console.log("You win this round ! Score: " + playerScore);
     }
 }
 
+function playMatch() {
+    while (computerScore !=== 5 && playerScore !=== 5) {
+        computerPlay(computerChoice);
+        playerSelection(playerChoice);
+        playRound(computerChoice, playerChoice);
+    }
+    if (playerScore === 5) {
+        console.log("Congratulations, you won !")
+    } else {
+        console.log("Sorry, the computer won this time.")
+    }
+}
